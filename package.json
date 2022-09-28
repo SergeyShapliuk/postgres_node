@@ -1,0 +1,16 @@
+{
+  "name": "postgres_node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "node": "nodemon index.js",
+    "postgres": "node createDatabase.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "pg": "^8.8.0"
+  }
+}
