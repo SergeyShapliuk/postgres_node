@@ -15,7 +15,7 @@ const getSomeTable = (request, response) => {
             console.log("error",error)
         }
         console.log("yes")
-      response.status(201).send(JSON.stringify(results.rows))
+      response.status(201).send(results.rows)
     })
 }
 const createSomeTable = (request, response) => {
@@ -34,10 +34,9 @@ const deleteSomeTable = (request, response) => {
         if (error) {
             console.log("error",error)
         }
-        response.status(201).send(`User added with ID: ${JSON.stringify(results.id)}`)
+        response.status(201).send(`User delete with ID: ${JSON.stringify(results.id)}`)
     })
 }
-
 module.exports = {
     getSomeTable,
     createSomeTable,
