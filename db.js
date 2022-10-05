@@ -1,11 +1,17 @@
 const Pool = require('pg').Pool
+const dotenv = require('dotenv')
 
+dotenv.config()
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
+console.log("env", process.env.DB_PASSWORD)
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: 5432,
+    connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+    ssl: isProduction,
 });
-
+pool.on('connect', () => {
+    console.log('Teamwork Database connected successfully!');
+});
 module.exports = pool
