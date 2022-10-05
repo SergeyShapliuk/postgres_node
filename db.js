@@ -5,14 +5,15 @@ dotenv.config()
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const connectionDev = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
-const connectionProd = `postgresql://${process.env.PROD_DB_USER}:${process.env.PROD_DB_PASSWORD}@${process.env.PROD_DB_HOST}:${process.env.PROD_DB_PORT}/${process.env.PROD_DB_DATABASE}`;
-
+const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
+console.log("env", process.env.DB_PASSWORD)
 const pool = new Pool({
-    connectionString: isProduction ? connectionProd: connectionDev,
-    ssl: isProduction,
+    connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+    ssl: {
+        rejectUnauthorized:false
+    },
 });
-console.log("rwerwer",connectionProd)
+console.log("rwerwer",process.env.DATABASE_URL)
 pool.on('connect', () => {
     console.log('Teamwork Database connected successfully!');
 });
