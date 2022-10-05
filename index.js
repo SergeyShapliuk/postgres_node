@@ -2,10 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const table_model = require('./postrgres')
-
+const dotenv = require('dotenv')
+    
 const app = express()
 
-const PORT = process.env.DATABASE_URL
+const PORT = process.env.DATABASE_URL || 3001
+
+dotenv.config()
 
 app.use(cors());
 
