@@ -5,7 +5,7 @@ const table_model = require('./postrgres')
 
 const app = express()
 
-const PORT = process.env.DATABASE_URL || 3001
+const PORT = process.env.DATABASE_URL
 
 app.use(cors());
 
