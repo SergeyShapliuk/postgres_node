@@ -2,8 +2,6 @@
   "name": "postgres_node",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:SergeyShapliuk/postgres_node.git",
-  "author": "SergeyShapliuk <sergeshapluk@gmail.com>",
   "license": "MIT",
   "scripts": {
     "node": "nodemon index.js",

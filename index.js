@@ -5,10 +5,7 @@ const table_model = require('./postrgres')
 
 const app = express()
 
-const PORT = process.env.DATABASE_URL || 3001
-
-
-app.use(cors());
+const PORT = process.env.PORT || 3001
 
 app.use(bodyParser.json())
 
@@ -17,6 +14,7 @@ app.use(
         extended: true,
     })
 )
+app.use(cors());
 
 app.get('/', (request, response) => {
     response.json({ info: 'Node.js, Express, and Postgres API' })
