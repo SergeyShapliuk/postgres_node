@@ -5,8 +5,7 @@ const table_model = require('./postrgres')
 
 const app = express()
 
-const port = 3001
-
+const PORT = process.env.DATABASE_URL || 3001
 
 app.use(cors());
 
@@ -27,6 +26,6 @@ app.post('/some_table', table_model.createSomeTable)
 app.delete(`/some_table/:id`, table_model.deleteSomeTable)
 
 
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}.`)
 })

@@ -1,13 +1,4 @@
-const Pool = require('pg').Pool
-
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: "root",
-    port: 5432,
-});
-
+const pool = require("./db")
 
 const getSomeTable = (request, response) => {
     pool.query('SELECT * FROM public.some_table ORDER BY id ASC', (error, results) => {
@@ -24,7 +15,7 @@ const createSomeTable = (request, response) => {
         if (error) {
             console.log("error",error)
         }
-        response.status(201).send(`User added with ID: ${JSON.stringify(results.rows[0].id)}`)
+        response.status(201).send(results.rows)
     })
 }
 const deleteSomeTable = (request, response) => {
@@ -34,7 +25,18 @@ const deleteSomeTable = (request, response) => {
         if (error) {
             console.log("error",error)
         }
-        response.status(201).send(`User delete with ID: ${JSON.stringify(results.id)}`)
+        response.status(201).send(JSON.stringify(id))
+    })
+}
+const udateSomeTable = (request, response) => {
+    const {name,quantity,distance}=request.body
+    const id = parseInt(request.params.id)
+    console.log("udateSomeTable",id,name,quantity,distance)
+    pool.query('UPDATE public.some_table SET (name,quantity,distance)=(SELECT name,quantity,distance WHERE id = $1)', [id,name,quantity,distance], (error, results) => {
+        if (error) {
+            console.log("error",error)
+        }
+        response.status(201).send(results.rows)
     })
 }
 module.exports = {
