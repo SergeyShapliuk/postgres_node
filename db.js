@@ -9,11 +9,9 @@ const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_P
 console.log("env", process.env.DB_PASSWORD)
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-    ssl: {
-        rejectUnauthorized:false
-    },
+    ssl: isProduction,
 });
-console.log("rwerwer",process.env.DATABASE_URL)
+
 pool.on('connect', () => {
     console.log('Teamwork Database connected successfully!');
 });
